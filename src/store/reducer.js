@@ -1,10 +1,11 @@
-import { ADD_PRODUCT, DELETE_PRODUCT, UPDATE_PRODUCT } from "./actions";
+import {FETCH_PRODUCTS, ADD_PRODUCT, DELETE_PRODUCT, UPDATE_PRODUCT } from "./actions";
 
 import productsData from "../products";
 import slugify from "slugify";
 
+
 const initialState = {
-  products: productsData,
+  products: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -31,6 +32,11 @@ const reducer = (state = initialState, action) => {
         products: state.products.map((product) =>
           product.id === updatedProduct.id ? updatedProduct : product
         ),
+      };
+      case FETCH_PRODUCTS:
+      return {
+        ...state,
+        products: action.payload
       };
     default:
       return state;
